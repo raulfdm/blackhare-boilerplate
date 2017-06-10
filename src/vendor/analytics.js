@@ -1,0 +1,1 @@
+//Paste your google analytics script here 
