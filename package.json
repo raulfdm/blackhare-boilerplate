@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "build": "yarn gulp build",
-    "server": "yarn gulp server"
+    "server": "yarn gulp server",
+		"deploy": "yarn gulp build && yarn gulp ghpages"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",

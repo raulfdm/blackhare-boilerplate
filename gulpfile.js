@@ -42,8 +42,6 @@ gulp.task('css', () => {
 
 gulp.task('clean', () => gulp.src('dist/').pipe(clean()));
 
-gulp.task('deploy', sequence('build', 'ghpages'))
-
 gulp.task('ghpages', () => gulp.src('./dist/**/*').pipe(ghPages()));
 
 gulp.task('img', () => {
