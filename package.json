@@ -1,11 +1,11 @@
 {
   "name": "web-magic-boilerplate",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "main": "index.js",
   "author": "Raul F. de Melo <melo.raulf@gmail.com> (https://rauldemelo.com.br)",
   "license": "MIT",
   "bin": {
-    "teste-cli": "./index.js"
+    "wp-boilerplate": "./index.js"
   },
   "dependencies": {
     "chalk": "^1.1.3",
