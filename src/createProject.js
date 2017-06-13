@@ -1,8 +1,9 @@
 const inquirer = require('inquirer')
 const chalk = require('chalk')
-const fs = require('fs-extra')
 
-const criar = ()=>{
+const copyBoilerplate = require('./copyBoilerplate')
+
+const createProject = ()=>{
     const questions = [
     {
         type: 'input',
@@ -36,11 +37,12 @@ const criar = ()=>{
 
 inquirer
     .prompt(questions)
-    .then(answers => {
-        console.log(answers)/*
-        copyMirror(answers.project.name)*/
+    .then(projectInfos => {
+        copyBoilerplate(projectInfos)
+        .then(succ => console.log('Projeto criado com sucesso'))
+        .catch(err => console.error(err))
     })
 
 }
 
-module.exports = criar
+module.exports = createProject

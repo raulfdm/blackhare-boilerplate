@@ -3,7 +3,7 @@
 const fs = require('fs-extra')
 const program = require('commander')
 
-const criar = require('./src/criar')
+const createProject = require('./src/createProject')
 
 program
     .version('0.0.1')
@@ -16,14 +16,7 @@ program
     .alias('-n')
     .description('create a new project based on boilerplate')
     .action((env, options) => {
-        criar()
+        createProject()
     });
 
-program.parse(process.argv);
-
-const copyMirror = (folderName) => {
-    fs
-        .copy('./src/mirror/', `./${folderName}/`)
-        .then(succ => console.log('success'))
-        .catch(err => console.log('Err', err))
-}
+program.parse(process.argv)
