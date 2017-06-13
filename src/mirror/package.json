@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "yarn gulp build",
-    "server": "yarn gulp server",
+    "server": "yarn build && yarn gulp server",
     "deploy": "yarn gulp build && yarn gulp ghpages"
   },
   "devDependencies": {
