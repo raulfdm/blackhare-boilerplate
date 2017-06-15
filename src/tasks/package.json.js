@@ -3,15 +3,27 @@ const beautify = require('js-beautify').js_beautify
 
 module.exports = packageJsonCreate = (projectInfos, path) => {
 
-    const obj = {
+    const scripts = {
+        yarn: {
+            build: 'yarn gulp build',
+            server: 'yarn build && yarn gulp server',
+            deploy: 'yarn gulp build && yarn gulp ghpages'
+        },
+        npm: {
+            gulp: "gulp",
+            build: "npm run gulp build",
+            server: "npm run build && npm run gulp server",
+            deploy: "npm run build && npm run gulp ghpages"
+        }
+    }
+
+    const packageContent = {
         "name": projectInfos.name,
         "version": projectInfos.version,
         "main": "index.js",
-        "scripts": {
-            "build": "yarn gulp build",
-            "server": "yarn build && yarn gulp server",
-            "deploy": "yarn gulp build && yarn gulp ghpages"
-        },
+        "scripts": projectInfos['package-manager'].toLowerCase() === 'yarn'
+            ? scripts.yarn
+            : scripts.npm,
         "devDependencies": {
             "autoprefixer": "^7.1.1",
             "babel-preset-es2015": "^6.24.1",
@@ -37,5 +49,5 @@ module.exports = packageJsonCreate = (projectInfos, path) => {
         }
     }
 
-    return fs.writeFile(`${path}/package.json`, beautify(JSON.stringify(obj)))
+    return fs.writeFile(`${path}/package.json`, beautify(JSON.stringify(packageContent)))
 }
