@@ -1,5 +1,6 @@
 const fs = require('fs-extra')
 const packageJson = require('./files/package.json')
+const chalk = require('chalk')
 
 const copyBoilerplate = projectInfos => {
     const mirrorPath = `${__dirname}/mirror`
@@ -7,10 +8,15 @@ const copyBoilerplate = projectInfos => {
 
     const newFolderPath = `${process.cwd()}/${projectName}`
 
-    return fs
+    fs
         .copy(mirrorPath, newFolderPath)
         .then(() => {
             packageJson(projectInfos.project, newFolderPath)
+            console.log('Projeto criado com sucesso')
+        })
+        .catch(err => {
+            console.log(chalk.red(err))
+            fs.remove(newFolderPath)
         })
 
 }
