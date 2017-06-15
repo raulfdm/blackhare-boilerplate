@@ -5,16 +5,16 @@ const program = require('commander')
 
 const createProject = require('./src/createProject')
 
+const currentVersion = fs.readJsonSync('./package.json').version
+
 program
-    .version('0.0.1')
-    .option('-l, --list [list]', 'Listar as opções')
-    .option('-c, --create [file]', 'Criar um novo arquivo')
-    .option('-n, --new [file]', 'Criar um novo projeto')
+    .version(currentVersion)
+    .option('-n, --new [file]', 'New Project')
 
 program
     .command('new')
     .alias('-n')
-    .description('create a new project based on boilerplate')
+    .description('Create a new project from scratch')
     .action((env, options) => {
         createProject()
     });
