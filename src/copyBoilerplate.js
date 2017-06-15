@@ -1,5 +1,5 @@
 const fs = require('fs-extra')
-const packageJson = require('./files/package.json')
+const packageJson = require('./tasks/package.json')
 const chalk = require('chalk')
 
 const copyBoilerplate = projectInfos => {
