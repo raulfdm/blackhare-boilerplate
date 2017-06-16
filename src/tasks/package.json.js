@@ -5,9 +5,10 @@ module.exports = packageJsonCreate = (projectInfos, path) => {
 
     const scripts = {
         yarn: {
-            build: 'yarn gulp build',
-            server: 'yarn build && yarn gulp server',
-            deploy: 'yarn gulp build && yarn gulp ghpages'
+            init: 'yarn install',
+            build: 'yarn run gulp build',
+            server: 'yarn run build && yarn run gulp server',
+            deploy: 'yarn run gulp build && yarn run gulp ghpages'
         },
         npm: {
             gulp: "gulp",
@@ -48,6 +49,15 @@ module.exports = packageJsonCreate = (projectInfos, path) => {
             "reset.css": "^2.0.2"
         }
     }
+    const contentJson = beautify(JSON.stringify(packageContent))
 
-    return fs.writeFile(`${path}/package.json`, beautify(JSON.stringify(packageContent)))
+    return new Promise((resolve, reject) => {
+
+        fs.writeFile(`${path}/package.json`, contentJson, (err) => {
+            if (err) 
+                reject(err)
+            else 
+                resolve(contentJson)
+        })
+    })
 }
