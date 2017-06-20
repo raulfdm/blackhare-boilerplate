@@ -22,7 +22,7 @@ const packageJsonCreate = (projectInfos) => {
     'name': projectInfos.name,
     'version': projectInfos.version,
     'main': 'index.js',
-    'scripts': projectInfos.name.toLowerCase() === 'yarn' ?
+    'scripts': projectInfos.package_manager.toLowerCase() === 'yarn' ?
       scripts.yarn :
       scripts.npm,
     'devDependencies': {
@@ -48,18 +48,18 @@ const packageJsonCreate = (projectInfos) => {
       'reset.css': '^2.0.2'
     }
   }
-  const contentJson = beautify(JSON.stringify(packageContent))
+  const packageJsonFormated = beautify(JSON.stringify(packageContent))
 
   return new Promise((resolve, reject) => {
 
-    fs.writeFile(`${projectInfos.newFolderPath}/package.json`, contentJson, (err) => {
+    fs.writeFile(`${projectInfos.projectRoot}/package.json`, packageJsonFormated, (err) => {
       if (err)
         reject(err)
       else {
-        const result = Object.assign(projectInfos, {
-          packageJson: contentJson
+        const updatedInfos = Object.assign(projectInfos, {
+          package_json: packageContent
         })
-        resolve(result)
+        resolve(updatedInfos)
       }
     })
   })
