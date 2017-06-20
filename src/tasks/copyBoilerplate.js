@@ -1,73 +1,96 @@
 const fs = require('fs-extra')
-const chalk = require('chalk')
 
 const packageJson = require('./package.json')
-/*const executeBuild = require('./build-task')*/
+const build = require('./buildTasks')
+const logs = require('../helpers/logs')
 const Spinner = require('../helpers/spinners')
 
+const UX_TIME_WAIT = 600
+
 const copyBoilerplate = projectInfos => {
-
-  const completeProjectInfos = Object.assign({}, projectInfos)
-
-  completeProjectInfos.mirrorPath = `${__dirname}/mirror`
-  completeProjectInfos.projectName = projectInfos.name
-  completeProjectInfos.newFolderPath = `${process.cwd()}/${completeProjectInfos.projectName}`
+  const completeProjectInfos = getPaths(projectInfos)
 
   copyFolder(completeProjectInfos)
     .then(generatePackageJson)
+    .then(build.installDependencies)
+    .then(()=>{
+      logs.success('Projeto criado com sucesso!')
+      logs.log(finalInstructions(projectInfos))
+    })
     .catch(err => {
-      console.log(chalk.red(err))
-      fs.remove(projectInfos.newFolderPath)
+      logs.errorTrace(err)
+      removeFolder(projectInfos.projectRoot)
     })
 }
 
-const copyFolder = (projectInfos) => {
-  return new Promise((resolve, reject) => {
-    const spin = new Spinner({
-      startMessage: 'Gerando os arquivos...',
-      successMessage: 'Arquivos gerados com sucesso!',
-      failureMessage: 'Erro ao gerar os arquivos!'
-    })
-    spin.start()
+const finalInstructions = (infos) =>{
+  return `Siga as seguintes instruções:
+1. Navegue para a pasta do projeto: $ cd ${infos.name}
+2. Suba o servidor com o comando: $ ${infos.package_manager.toLowerCase() == 'npm' ? 'npm run' : infos.package_manager } server`
+}
 
+const getPaths = projectInformations => {
+  let newInfos = Object.assign({}, projectInformations)
+
+  newInfos.mirrorPath = `${__dirname}/../boilerplate`
+  newInfos.projectRoot =
+  `${process.cwd()}/${projectInformations.name}`
+
+  return newInfos
+}
+
+const removeFolder = path => {
+  fs.remove(path)
+}
+
+const copyFolder = projectInfos => {
+  const spin = new Spinner({
+    startMessage: 'Gerando os arquivos...',
+    successMessage: 'Arquivos gerados com sucesso!',
+    failureMessage: 'Erro ao gerar os arquivos!'
+  })
+  spin.start()
+
+  return new Promise((resolve, reject) => {
     fs
-      .copy(projectInfos.mirrorPath, projectInfos.newFolderPath)
+      .copy(projectInfos.mirrorPath, projectInfos.projectRoot)
       .then(() => {
         setTimeout(() => {
           spin.done()
           resolve(projectInfos)
-        }, 1000)
+        }, UX_TIME_WAIT)
       })
       .catch(err => {
         setTimeout(() => {
           spin.fail()
           reject(err)
-        }, 1000)
+        }, UX_TIME_WAIT)
       })
   })
 }
 
 const generatePackageJson = (projectInfos) => {
-  new Promise((resolve, reject) => {
-    const spin = new Spinner({
-      startMessage: 'Gerando o package.json...',
-      successMessage: 'Package.json gerado com sucesso!',
-      failureMessage: 'Erro ao gerar o package.json'
-    })
+  const spin = new Spinner({
+    startMessage: 'Gerando o package.json...',
+    successMessage: 'Package.json gerado com sucesso!',
+    failureMessage: 'Erro ao gerar o package.json'
+  })
 
-    spin.start()
+  spin.start()
+
+  return new Promise((resolve, reject) => {
     packageJson(projectInfos)
-      .then(() => {
+      .then(newInfos => {
         setTimeout(() => {
           spin.done()
-          resolve(true)
-        }, 1000)
+          resolve(newInfos)
+        }, UX_TIME_WAIT)
       })
       .catch(err => {
         setTimeout(() => {
           spin.fail()
           reject(err)
-        }, 1000)
+        }, UX_TIME_WAIT)
       })
   })
 }
