@@ -3,9 +3,9 @@ const Spinner = require('../helpers/spinners')
 
 const installDependencies = projectInfos => {
   const spinn = new Spinner({
-    startMessage: 'Instaling dependencies...',
-    successMessage: 'Dependencies installed successfully...',
-    failureMessage: 'Error to Install Dependencies'
+    startMessage: 'Instalando as dependencias. Pode levar alguns minutos...',
+    successMessage: 'Dependencias instaladas com sucesso!',
+    failureMessage: 'Erro ao instalar as dependencias!'
   })
 
   const commands = {
