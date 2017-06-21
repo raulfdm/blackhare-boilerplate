@@ -1,6 +1,10 @@
 const ora = require('ora')
 
-class Spinner {
+export default class Spinner {
+	private startMessage
+	private successMessage
+	private failureMessage
+	private spinner
 
   constructor(options) {
     this.startMessage = options.startMessage || 'No start message'
@@ -18,7 +22,7 @@ class Spinner {
   stop() {
     this
       .spinner
-      .stop(this.stopMessage)
+      .stop(this.failureMessage)
   }
 
   done(){
@@ -38,10 +42,9 @@ class Spinner {
   set doneMessage(newMessage){
     this.successMessage = newMessage
   }
-    
+
   set errorMessage(newMessage){
     this.failureMessage = newMessage
   }
 }
 
-module.exports = Spinner

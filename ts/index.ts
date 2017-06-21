@@ -1,12 +1,10 @@
 #!/usr/bin/env node
 
+import * as fs from 'fs-extra'
+import createProject from './createProject'
 const program = require('commander')
-const fs = require('fs-extra')
 
-const createProject = require('./src/createProject')
-
-
-const currentVersion = fs.readJsonSync(`${__dirname}/package.json`).version
+const currentVersion = fs.readJsonSync(`${__dirname}/../package.json`).version
 
 program
   .version(currentVersion)

@@ -1,7 +1,7 @@
 const exec = require('child_process').exec
-const Spinner = require('../helpers/spinners')
+import Spinner from '../helpers/Spinner'
 
-const installDependencies = projectInfos => {
+export const installDependencies = projectInfos => {
   const spinn = new Spinner({
     startMessage: 'Instalando as dependencias. Pode levar alguns minutos...',
     successMessage: 'Dependencias instaladas com sucesso!',
@@ -27,8 +27,4 @@ const installDependencies = projectInfos => {
 
     })
   })
-}
-
-module.exports = {
-  installDependencies
 }

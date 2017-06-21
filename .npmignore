@@ -2,6 +2,7 @@
 .vscode/
 my-project/
 img/
+ts/
 
 # Files
 .editorconfig
@@ -9,4 +10,5 @@ img/
 .gitignore
 .npmignore
 .travis.yml
+tsconfig.json
 yarn.lock
