@@ -1,0 +1,12 @@
+# Folders
+.vscode/
+my-project/
+img/
+
+# Files
+.editorconfig
+.eslintrc.json
+.gitignore
+.npmignore
+.travis.yml
+yarn.lock

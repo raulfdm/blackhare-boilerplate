@@ -1,26 +1,24 @@
 #!/usr/bin/env node
 
-const fs = require('fs-extra')
 const program = require('commander')
+const fs = require('fs-extra')
 
 const createProject = require('./src/createProject')
 
-const currentVersion = fs.readJsonSync('./package.json').version
+
+const currentVersion = fs.readJsonSync(`${__dirname}/package.json`).version
 
 program
-    .version(currentVersion)
-    .option('-n, --new [file]', 'New Project')
+  .version(currentVersion)
 
 program
-    .command('new')
-    .alias('-n')
-    .description('Create a new project from scratch')
-    .action((env, options) => {
-        createProject()
-    });
+  .command('new')
+  .alias('-n')
+  .description('Create a new project from scratch')
+  .action(createProject)
 
 program.parse(process.argv)
 
 if (!process.argv.slice(2).length) {
-    program.outputHelp();
+  program.outputHelp()
 }
