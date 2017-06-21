@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://github.com/raulfdm/blackhare-boilerplate/blob/develop/img/hare.jpg" alt="black hare" width="250">
+<img src="blackhare-boilerplate/img/hare.jpg" alt="black hare" width="250">
 </p>
 <p align="center">
 <img src="https://travis-ci.org/raulfdm/blackhare-boilerplate.svg?branch=master" alt="black hare">
