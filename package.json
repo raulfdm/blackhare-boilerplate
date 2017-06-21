@@ -1,12 +1,12 @@
 {
   "name": "blackhare",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "main": "index.js",
   "author": "Raul F. de Melo <melo.raulf@gmail.com> (https://rauldemelo.com.br)",
   "license": "MIT",
   "repository": {
 		"type": "git",
-		"url": "https://github.com/raulfdm/blackhare-boilerplates"
+		"url": "https://github.com/raulfdm/blackhare-boilerplate"
 	},
   "bin": {
     "blackhare": "./index.js"
