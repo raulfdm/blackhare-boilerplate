@@ -1,18 +1,22 @@
 {
   "name": "blackhare",
-  "version": "0.2.4",
+  "version": "0.3.1",
   "main": "index.js",
   "author": "Raul F. de Melo <melo.raulf@gmail.com> (https://rauldemelo.com.br)",
   "license": "MIT",
   "repository": {
-		"type": "git",
-		"url": "https://github.com/raulfdm/blackhare-boilerplate"
-	},
+    "type": "git",
+    "url": "https://github.com/raulfdm/blackhare-boilerplate"
+  },
   "bin": {
-    "blackhare": "./index.js"
+    "blackhare": "./src/index.js"
   },
   "scripts": {
-    "test": "./node_modules/.bin/eslint index.js src/**/*.js --fix"
+    "test": "./node_modules/.bin/eslint ts/**.* --fix",
+		"pub" : "yarn copyBoilerplate && npm publish",
+		"copyBoilerplate": "node copy-boilerplate.js",
+    "compile": "tsc && yarn copyBoilerplate",
+    "start": "tsc -w"
   },
   "dependencies": {
     "chalk": "^1.1.3",
@@ -23,6 +27,9 @@
     "ora": "^1.3.0"
   },
   "devDependencies": {
-    "eslint": "^4.0.0"
+    "@types/node": "^8.0.1",
+    "eslint": "^4.0.0",
+    "typescript": "^2.3.4",
+    "typescript-eslint-parser": "^3.0.0"
   }
 }

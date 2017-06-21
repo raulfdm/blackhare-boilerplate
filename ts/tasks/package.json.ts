@@ -65,4 +65,4 @@ const packageJsonCreate = (projectInfos) => {
   })
 }
 
-module.exports = packageJsonCreate
+export default packageJsonCreate
