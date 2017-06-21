@@ -1,12 +1,12 @@
 <p align="center">
-<img src="./img/hare.jpg" alt="black hare" width="250">
+<img src="https://github.com/raulfdm/blackhare-boilerplate/blob/develop/img/hare.jpg" alt="black hare" width="250">
 </p>
 <p align="center">
 <img src="https://travis-ci.org/raulfdm/blackhare-boilerplate.svg?branch=master" alt="black hare">
 </p>
 
 
-# Black Hare
+# Black Hare Boilerplate
 > An easy way to build fast a web project from scratch!
 
 
