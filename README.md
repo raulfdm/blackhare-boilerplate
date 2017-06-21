@@ -1,5 +1,5 @@
 <p align="center">
-<img src="blackhare-boilerplate/img/hare.jpg" alt="black hare" width="250">
+<img src="https://github.com/raulfdm/blackhare-boilerplate/blob/develop/img/hare.jpg?raw=true" alt="black hare" width="250">
 </p>
 <p align="center">
 <img src="https://travis-ci.org/raulfdm/blackhare-boilerplate.svg?branch=master" alt="black hare">
@@ -17,15 +17,16 @@ So, I decide to create a **Command-line user Interface (CLI)** to generate this 
 
 ## Technologies
 This boilerplate uses the followings technologies:
-- Template Engine: PUG (ex Jade)
-- CSS: PostCSS 
-- Reset CSS: Meyer Version
-- JS Transpile: BabelJS
-- Task Runner: Gulp
-- Server Live Reload: BrowserSync
-- Package Manager: Yarn or NPM (You decide)
+- Template Engine: [PugJS](https://pugjs.org/) (ex Jade)
+- CSS: 
+  - Tooling: [PostCSS](http://postcss.org/)
+  - Reset CSS: [Meyer Version](https://meyerweb.com/eric/tools/css/reset/)
+- JS Transpiller: [BabelJS](https://babeljs.io/)
+- Task Runner: [Gulp](http://gulpjs.com/)
+- Server Live Reload: [BrowserSync](https://www.browsersync.io/)
+- Package Manager: [Yarn](https://yarnpkg.com/) or [NPM](https://www.npmjs.com/) (You decide)
 
-## How-to
+## How To
 For the best use, you should install globally:
 ```sh
 npm i -g blackhare
@@ -43,3 +44,10 @@ Answer the questions:
 1. Confirm project informations (default: Yes)
 
 Than, your project will be generate and all dependencies will be installed!
+
+## Versioning
+
+To keep better organization of releases we follow the [Semantic Versioning 2.0.0](http://semver.org/) guidelines.
+
+## License
+[MIT License](https://github.com/raulfdm/blackhare-boilerplate/blob/master/LICENSE.md) © [Raul de Melo](https://rauldemelo.com.br/)
