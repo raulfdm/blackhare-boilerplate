@@ -10,7 +10,6 @@ const currentVersion = fs.readJsonSync(`${__dirname}/package.json`).version
 
 program
   .version(currentVersion)
-  .option('-n, --new [file]', 'New Project')
 
 program
   .command('new')
