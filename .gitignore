@@ -1,7 +1,8 @@
 # Folders
 node_modules/
 my-project/
-src/
+app/
 
 # Files
 test.js
+*.log*

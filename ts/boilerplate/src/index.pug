@@ -1,0 +1,16 @@
+//-Extended Template
+extends ./template/default.pug
+
+//-Personalized description CEO tag (máx. 150 char)
+block meta-seo
+    meta(name="description" content="")
+
+//-Google Analytics Script
+block analytics
+    script
+        include vendor/analytics.js
+
+//-Your content Here..
+block content
+    include ./includes/home.pug
+//-   include ./includes/...
