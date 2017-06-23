@@ -1,7 +1,7 @@
 const fs = require('fs-extra')
 
 try {
-	fs.copySync('./ts/boilerplate', 'src/boilerplate')
+	fs.copySync('./ts/boilerplate', 'app/boilerplate')
 	console.log('Sucess!')
 } catch (error) {
 	console.error(error)
