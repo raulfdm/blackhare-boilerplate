@@ -1,48 +1,46 @@
 const fs = require('fs-extra')
 import packageJson from './package.json.js'
-import {installDependencies} from './buildTasks'
-import {success,error,log,errorTrace} from '../helpers/logs'
+import {
+	installDependencies
+} from './buildTasks'
+import {
+	success,
+	error,
+	log,
+	errorTrace
+} from '../helpers/logs'
 import Spinner from '../helpers/Spinner'
+import { ProjectInfomation } from '../models/ProjectInfo';
 
 const UX_TIME_WAIT = 600
 
-const copyBoilerplate = projectInfos => {
-	const completeProjectInfos = getPaths(projectInfos)
+const copyBoilerplate = (projectInfo: ProjectInfomation) => {
 
-	copyFolder(completeProjectInfos)
+	copyFolder(projectInfo)
 		.then(generatePackageJson)
 		.then(installDependencies)
 		.then(() => {
 			success('Projeto criado com sucesso!')
-			log(finalInstructions(projectInfos))
+			log(finalInstructions(projectInfo))
 		})
 		.catch(err => {
 			errorTrace(err)
-			removeFolder(projectInfos.projectRoot)
+			removeFolder(projectInfo.projectPath)
 		})
 }
 
-const finalInstructions = (infos) => {
+const finalInstructions = (infos: any): string => {
 	return `Siga as seguintes instruções:
 1. Navegue para a pasta do projeto: $ cd ${infos.name}
 2. Suba o servidor com o comando: $ ${infos.package_manager.toLowerCase() == 'npm' ? 'npm run' : infos.package_manager } server`
 }
 
-const getPaths = projectInformations => {
-	let newInfos = Object.assign({}, projectInformations)
-
-	newInfos.mirrorPath = `${__dirname}/../boilerplate`
-	newInfos.projectRoot =
-		`${process.cwd()}/${projectInformations.name}`
-
-	return newInfos
-}
-
-const removeFolder = path => {
+const removeFolder = (path: string): void => {
 	fs.remove(path)
 }
 
-const copyFolder = projectInfos => {
+const copyFolder = (projectInfo: ProjectInfomation): Promise<any> => {
+
 	const spin = new Spinner({
 		startMessage: 'Gerando os arquivos...',
 		successMessage: 'Arquivos gerados com sucesso!',
@@ -51,15 +49,16 @@ const copyFolder = projectInfos => {
 	spin.start()
 
 	return new Promise((resolve, reject) => {
+		const boilerplateFolder = `${__dirname}/../boilerplate/`
 		fs
-			.copy(projectInfos.mirrorPath, projectInfos.projectRoot)
+			.copy(boilerplateFolder, projectInfo.projectPath)
 			.then(() => {
 				setTimeout(() => {
 					spin.done()
-					resolve(projectInfos)
+					resolve(projectInfo)
 				}, UX_TIME_WAIT)
 			})
-			.catch(err => {
+			.catch((err: any) => {
 				setTimeout(() => {
 					spin.fail()
 					reject(err)
@@ -68,7 +67,7 @@ const copyFolder = projectInfos => {
 	})
 }
 
-const generatePackageJson = (projectInfos) => {
+const generatePackageJson = (projectInfo: ProjectInfomation) => {
 	const spin = new Spinner({
 		startMessage: 'Gerando o package.json...',
 		successMessage: 'Package.json gerado com sucesso!',
@@ -78,7 +77,7 @@ const generatePackageJson = (projectInfos) => {
 	spin.start()
 
 	return new Promise((resolve, reject) => {
-		packageJson(projectInfos)
+		packageJson(projectInfo)
 			.then(newInfos => {
 				setTimeout(() => {
 					spin.done()

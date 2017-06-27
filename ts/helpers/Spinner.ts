@@ -1,50 +1,55 @@
-const ora = require('ora')
+const  ora = require('ora')
 
 export default class Spinner {
-	private startMessage
-	private successMessage
-	private failureMessage
-	private spinner
+	private _startMessage: string
+	private _successMessage: string
+	private _failureMessage: string
+	private _spinner: any
 
-  constructor(options) {
-    this.startMessage = options.startMessage || 'No start message'
-    this.successMessage = options.successMessage || 'No success message'
-    this.failureMessage = options.failureMessage || 'No failure message'
-    this.spinner = ora()
-  }
+	constructor(options: SpinnerOption) {
+		this._startMessage = options.startMessage || 'No start message'
+		this._successMessage = options.successMessage || 'No success message'
+		this._failureMessage = options.failureMessage || 'No failure message'
+		this._spinner = ora()
+	}
 
-  start() {
-    this
-      .spinner
-      .start(this.startMessage)
-  }
+	start() {
+		this
+			._spinner
+			.start(this._startMessage)
+	}
 
-  stop() {
-    this
-      .spinner
-      .stop(this.failureMessage)
-  }
+	stop() {
+		this
+			._spinner
+			.stop(this._failureMessage)
+	}
 
-  done(){
-    this.spinner.succeed(this.successMessage)
-  }
+	done() {
+		this._spinner.succeed(this._successMessage)
+	}
 
-  fail() {
-    this
-      .spinner
-      .fail(this.failureMessage)
-  }
+	fail() {
+		this
+			._spinner
+			.fail(this._failureMessage)
+	}
 
-  set initalMessage(newMessage){
-    this.startMessage = newMessage
-  }
+	set initalMessage(newMessage: string) {
+		this._startMessage = newMessage
+	}
 
-  set doneMessage(newMessage){
-    this.successMessage = newMessage
-  }
+	set doneMessage(newMessage: string){
+		this._successMessage = newMessage
+	}
 
-  set errorMessage(newMessage){
-    this.failureMessage = newMessage
-  }
+	set errorMessage(newMessage: string) {
+		this._failureMessage = newMessage
+	}
 }
 
+export interface SpinnerOption{
+	startMessage: string,
+	successMessage: string,
+	failureMessage: string
+}
