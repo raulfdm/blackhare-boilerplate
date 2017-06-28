@@ -3,6 +3,7 @@
 </p>
 <p align="center">
 <img src="https://travis-ci.org/raulfdm/blackhare-boilerplate.svg?branch=master" alt="black hare">
+<a href="https://david-dm.org/raulfdm/blackhare-boilerplate" title="dependencies status"><img src="https://david-dm.org/raulfdm/blackhare-boilerplate/status.svg"/></a>
 </p>
 
 
