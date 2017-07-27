@@ -1,11 +1,13 @@
-const exec = require('child_process').exec
+import execProcess = require('child_process')
 import Spinner from '../helpers/Spinner'
+
+const exec: any = execProcess.exec
 
 export const installDependencies = (projectInfos: any) => {
   const spinn = new Spinner({
+    failureMessage: 'Erro ao instalar as dependencias!',
     startMessage: 'Instalando as dependencias. Pode levar alguns minutos...',
     successMessage: 'Dependencias instaladas com sucesso!',
-    failureMessage: 'Erro ao instalar as dependencias!'
   })
 
   const commands = {
