@@ -1,25 +1,32 @@
 import inquirer = require('inquirer')
 import beautify = require('js-beautify')
 import Log from '../helpers/Log'
+import ProjectInfosModel from '../models/ProjectInfosModel'
 import copyBoilerplate from '../tasks/copyBoilerplate'
-
 
 export default class PorjectController {
   private _logs: Log = new Log()
-
+  private _projectInformations: ProjectInfosModel
 
   public bootstrap() {
     inquirer
       .prompt(this._initialQuestions())
-      .then((projectInfos: any) => {
-        this._confirmProjectInfos(projectInfos).then((cb: any) => {
-          if (cb.confirmation) {
-            copyBoilerplate(projectInfos.project)
-          } else {
-            process.exit()
-          }
-        })
+      .then((answers: inquirer.Answers) => {
+        this._projectInformations = new ProjectInfosModel(
+          answers.name,
+          answers.version,
+          answers.package_manager)
+        this._logs.log(this._projectInformations.name)
+        return this._confirmProjectInfos()
       })
+      .then((answer: inquirer.Answers) => {
+        const copyAction = new copyBoilerplate(this._projectInformations)
+
+        answer.confirmation
+          ? copyAction.start()
+          : process.exit()
+      })
+
   }
 
   private _initialQuestions(): object[] {
@@ -27,7 +34,7 @@ export default class PorjectController {
     return [{
       default: 'my-project',
       message: 'Qual o nome do seu projet?',
-      name: 'project.name',
+      name: 'name',
       type: 'input',
       validate(input: any) {
         if (input.length < 3) {
@@ -44,7 +51,7 @@ export default class PorjectController {
     }, {
       default: '0.0.1',
       message: 'Informe a versão:',
-      name: 'project.version',
+      name: 'version',
       type: 'input',
       validate(input: any) {
         if (/\d\.\d\.\d/g.test(input)) {
@@ -59,13 +66,13 @@ export default class PorjectController {
       ],
       default: 'yarn',
       message: 'Escolha o gerenciador de dependencias',
-      name: 'project.package_manager',
+      name: 'package_manager',
       type: 'list',
     }]
   }
 
-  private _confirmProjectInfos = (projectInfos: any) => {
-    this._logs.info(this._formatProjectInfos(projectInfos))
+  private _confirmProjectInfos = () => {
+    this._logs.info(this._projectInformations.basicInfoToJson())
 
     const question = [{
       default: 'Y',
@@ -75,6 +82,4 @@ export default class PorjectController {
     }]
     return inquirer.prompt(question)
   }
-
-  private _formatProjectInfos = (json: JSON) => `\n${beautify(JSON.stringify(json))}\n`
 }

@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 import ProjectController from './controllers/ProjectController'
-const fs = require('fs-extra')
-const program = require('commander')
-const path = require('path')
+import fs = require('fs-extra')
+import program = require('commander')
+import path = require('path')
 const packageJsonRoot = path.join(__dirname, '../package.json')
 const currentVersion = fs.readJsonSync(packageJsonRoot).version
 
