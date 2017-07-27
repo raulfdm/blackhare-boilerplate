@@ -9,10 +9,10 @@
     "url": "https://github.com/raulfdm/blackhare-boilerplate"
   },
   "bin": {
-    "blackhare": "./js/index.js"
+    "blackhare": "./dist/index.js"
   },
   "scripts": {
-    "test": "./node_modules/.bin/eslint src/ts/**.* --fix",
+    "test": "yarn tslint src/**/*",
     "pub": "yarn copyBoilerplate && npm publish",
     "copyBoilerplate": "node js/tasks/copy-boilerplate.js",
     "compile": "tsc && yarn copyBoilerplate",
@@ -28,8 +28,12 @@
   },
   "devDependencies": {
     "@types/chalk": "^0.4.31",
+    "@types/fs-extra": "^4.0.0",
+    "@types/inquirer": "^0.0.35",
+    "@types/js-beautify": "^0.0.30",
     "@types/node": "^8.0.1",
-    "eslint": "^4.0.0",
+    "@types/ora": "^1.3.0",
+    "tslint": "^5.5.0",
     "typescript": "^2.3.4",
     "typescript-eslint-parser": "^3.0.0"
   }
