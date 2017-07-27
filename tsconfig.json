@@ -3,11 +3,12 @@
 		"baseUrl": ".",
 		"target": "es6",
 		"module": "commonjs",
-		"outDir": "src/",
-		"noEmitOnError": true
+		"outDir": "js/",
+		"noEmitOnError": true,
+		"noImplicitAny": true
 	},
 	"include": [
-		"ts/**.*"
+		"src/**/*.ts"
 	],
 	"exclude": [
 		"node_modules"

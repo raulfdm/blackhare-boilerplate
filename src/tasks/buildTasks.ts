@@ -1,7 +1,7 @@
 const exec = require('child_process').exec
 import Spinner from '../helpers/Spinner'
 
-export const installDependencies = projectInfos => {
+export const installDependencies = (projectInfos: any) => {
   const spinn = new Spinner({
     startMessage: 'Instalando as dependencias. Pode levar alguns minutos...',
     successMessage: 'Dependencias instaladas com sucesso!',
@@ -16,7 +16,7 @@ export const installDependencies = projectInfos => {
   return new Promise((resolve, reject) => {
     spinn.start()
 
-    exec(commands.downFolder + ' && ' + commands.install, (err, stdout) => {
+    exec(commands.downFolder + ' && ' + commands.install, (err: any, stdout: any) => {
       if (err) {
         spinn.fail()
         reject(err)

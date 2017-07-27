@@ -1,7 +1,11 @@
 # Folders
 node_modules/
 my-project/
-src/
+dist/
+.vscode/
+
+# Exclude Folders
+!boilerplate/*
 
 # Files
 test.js

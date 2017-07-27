@@ -2,7 +2,11 @@
 .vscode/
 my-project/
 img/
-ts/
+src/
+node_modules/
+
+# Exclude Folders
+!boilerplate/
 
 # Files
 .editorconfig
